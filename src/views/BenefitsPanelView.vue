@@ -21,15 +21,16 @@ import { collection, getDocs, query,onSnapshot } from 'firebase/firestore';
     const getBenefits = () => {
         const q = query(collection(db, 'organizations', userStore.user.data.organizationId, 'benefits'));
         const querySnapshot = getDocs(q);
-        querySnapshot.then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                const data = doc.data();
-                data.id = doc.id;
-                benefits.value.push(data);
-                console.log(data);
-                
+
+        onSnapshot(q, (snapshot) => {
+            snapshot.docChanges().forEach((change) => {
+                if (change.type === 'added') {
+                    benefits.value.push(change.doc.data());
+                }
             });
         });
+
+      
     };
     onMounted(() => {
         getBenefits();
@@ -44,6 +45,8 @@ import { collection, getDocs, query,onSnapshot } from 'firebase/firestore';
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: flex-start;
+    
     width: 100%;
     height: 100%;
 
@@ -51,6 +54,7 @@ import { collection, getDocs, query,onSnapshot } from 'firebase/firestore';
    
 }
 .overflow-container {
+    overflow-y: auto;
 }
 
 </style>

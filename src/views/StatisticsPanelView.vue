@@ -1,6 +1,6 @@
 <template >
     <div class="view_container">
-        <h1>Ustawienia</h1>
+        <h1>Statystyki</h1>
     </div>
 </template>
 <script setup lang="ts">

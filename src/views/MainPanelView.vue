@@ -41,8 +41,6 @@ const getMembers = async () => {
         snapshot.docChanges().forEach((change) => {
             if (change.type === "added") {
                 members.value.push(change.doc.data());
-                
-                console.log("New city: ", change.doc.data());
             }
             
         });

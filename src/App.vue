@@ -11,7 +11,9 @@
         <AddBenefitForm/>
       </div>
     </ActivityModal>
-    <NavbarMain/>
+    <NavbarMain
+    v-if="userStore.user.isLogged"
+    />
   <main class="panel__container">
    
         <div class="panel__box"> 
